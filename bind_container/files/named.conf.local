@@ -1,4 +1,8 @@
 zone "private.azure.playtechnique.io" {
   type primary;
   file "/etc/bind/private_azure_pt_io.zone";
+
+  forwarders {
+          168.63.129.16;
+  };
 };
