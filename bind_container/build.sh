@@ -27,7 +27,7 @@ do
     "-g"       )  GIT="true"; shift;;
     "--env-file"       )  shift; ENV_FILE=$arg; shift;;
     "-h" | "--help"    )  show_help="true"; shift;;
-    "-p" | "--push"    )  push="true"; shift;;
+    "-p" | "--push"    )  PUSH="true"; shift;;
   esac
 done
 
