@@ -7,6 +7,7 @@ THIS_SCRIPT_NAME=$(basename $0)
 ENV_FILE="${THIS_SCRIPT_DIR}/build.env"
 NO_CACHE=""
 GIT="false"
+PUSH="false"
 
 function usage() {
   cat <<EOS
@@ -14,7 +15,8 @@ function usage() {
   Arguments:
     -v            -- Version number to tag the build with. Defaults to latest.
     --no-cache    -- Pass the --no-cache flag through to docker build
-    -g            -- add and tag in git
+    -g            -- add and tag/commit in git
+    -p            -- push to docker hub
 EOS
 }
 
@@ -25,6 +27,7 @@ do
     "-g"       )  GIT="true"; shift;;
     "--env-file"       )  shift; ENV_FILE=$arg; shift;;
     "-h" | "--help"    )  show_help="true"; shift;;
+    "-p" | "--push"    )  push="true"; shift;;
   esac
 done
 
@@ -46,4 +49,8 @@ if [[ "${GIT}" == "true" ]]; then
   git add .
   git tag ${IMAGE_VERSION}
   git commit -m "Source for version ${IMAGE_VERSION}"
+fi
+
+if [[ "${PUSH}" == "true" ]]; then
+  docker push "${IMAGE_TAG}:${IMAGE_VERSION}"
 fi
