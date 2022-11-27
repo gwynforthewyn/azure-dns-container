@@ -5,4 +5,10 @@ options {
         allow-query { any; };
 
         dnssec-validation no;
+
+      forwarders {
+              168.63.129.16;
+      };
+
+      forward first;
 };
