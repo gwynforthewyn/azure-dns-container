@@ -1,0 +1,9 @@
+---
+- name: Set up debian for docker
+  import_tasks: docker.yaml
+
+- name: Stop systemd and replace with resolv.conf
+  import_tasks: stop_systemd_resolved.yaml
+
+- name: Upload convenience container runner script
+  import_tasks: upload_bind_run_script.yaml

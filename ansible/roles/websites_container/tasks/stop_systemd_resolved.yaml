@@ -1,0 +1,14 @@
+---
+- name: Stop systemd-resolved so that port 53 is available for bind
+  ansible.builtin.systemd:
+    name: systemd-resolved
+    enabled: no
+    state: stopped
+
+- name: Symlink resolv.conf
+  ansible.builtin.file:
+    src: /run/systemd/resolve/resolv.conf
+    dest: /etc/resolv.conf
+    owner: root
+    group: root
+    state: link

@@ -1,0 +1,12 @@
+$TTL 1m
+@   IN  SOA     ns1.azure.playtechnique.io. gwyn.playtechnique.io. (
+        1  ;Serial
+        5m        ;Refresh
+        5m        ;Retry
+        5m     ;Expire
+        0m        ;Negative response caching TTL
+)
+
+    IN NS   ns1.azure.playtechnique.io.
+
+friend IN A 127.0.0.15

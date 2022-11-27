@@ -1,0 +1,4 @@
+---
+# These are set via env variables
+docker_user: fake
+docker_pw: fake

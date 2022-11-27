@@ -1,0 +1,8 @@
+---
+- name: upload bind container helper script
+  template:
+    src: run_bind.sh
+    dest: /home/{{ansible_user}}/run_bind.sh
+    owner: "{{ansible_user}}"
+    group: "{{ansible_user}}"
+    mode: '0700'

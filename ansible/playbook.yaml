@@ -1,0 +1,6 @@
+---
+- hosts: az
+  remote_user: wendy
+  become: yes
+  roles:
+    - websites_container
