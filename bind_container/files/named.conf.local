@@ -1,0 +1,7 @@
+zone second-private.azure.playtechnique.io {
+    forwarders {
+                 168.63.129.16;
+            };
+
+            forward only;
+}
