@@ -8,6 +8,7 @@ ENV_FILE="${THIS_SCRIPT_DIR}/build.env"
 NO_CACHE=""
 GIT="false"
 PUSH="false"
+RUN="false"
 
 function usage() {
   cat <<EOS
@@ -17,6 +18,7 @@ function usage() {
     --no-cache    -- Pass the --no-cache flag through to docker build
     -g            -- add and tag/commit in git
     -p            -- push to docker hub
+    -r            -- run the container after a build. Will exit after running exits.
 EOS
 }
 
@@ -24,10 +26,11 @@ for arg in "$@"
 do
   case $arg in
     "--no-cache"       )  NO_CACHE="--no-cache"; shift;;
-    "-g"       )  GIT="true"; shift;;
+    "-g"               )  GIT="true"; shift;;
     "--env-file"       )  shift; ENV_FILE=$arg; shift;;
     "-h" | "--help"    )  show_help="true"; shift;;
     "-p" | "--push"    )  PUSH="true"; shift;;
+    "-r"               )  RUN="true"; shift;;
   esac
 done
 
@@ -44,6 +47,11 @@ else
 fi
 
 docker build ${NO_CACHE} -t "${IMAGE_TAG}:${IMAGE_VERSION}" .
+if [[ "${RUN}" == "true" ]]; then
+  docker run -it ${IMAGE_TAG}:${IMAGE_VERSION}
+  exit 0
+fi
+
 
 if [[ "${GIT}" == "true" ]]; then
   git add .
