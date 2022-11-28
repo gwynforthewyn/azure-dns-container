@@ -11,5 +11,5 @@ zone "private.azure.playtechnique.io" {
         168.63.129.16;
   };
 
-  forward first;
+  forward only;
 };
